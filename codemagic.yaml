@@ -1,0 +1,15 @@
+workflows:
+  build:
+    name: Flutter Build (ZIP)
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      - name: Unzip project
+        script: unzip barq_app_with_gitignore.zip -d barq_app
+      - name: Get dependencies
+        script: cd barq_app && flutter pub get
+      - name: Build release APK
+        script: cd barq_app && flutter build apk --release
+    artifacts:
+      - barq_app/build/app/outputs/flutter-apk/app-release.apk
